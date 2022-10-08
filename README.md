@@ -8,6 +8,7 @@ You need Multipass to use this orchstrator.
 
 Simply run:
 ```
+pip install git+https://github.com/hdumcke/multipass-sdk@PR2#egg=multipass-sdk # while waiting for PR to be accepted
 pip install git+https://github.com/hdumcke/multipass-orchestrator@main#egg=multipass-orchestrator
 ```
 
@@ -78,6 +79,6 @@ multipass list
 ssh -o "IdentitiesOnly=yes" -i id_rsa -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no ubuntu@192.168.64.32 # use IP addess shown with multipass list
 ls -la # see injected build and run script, see build and run log files
 exit # leave vm
-mpo-deploy test-environment.yaml
+mpo-delete test-environment.yaml
 multipass list
 ```

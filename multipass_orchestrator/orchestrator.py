@@ -8,7 +8,6 @@ def execute(vm_name, script):
     client.transfer(script, "%s:/home/ubuntu" % vm_name)
     vm = client.get_vm(vm_name)
     vm.exec("chmod +x %s" % script.split('/')[-1])
-    print("./%s" % script.split('/')[-1])
     vm.exec("./%s" % script.split('/')[-1])
 
 
