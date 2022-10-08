@@ -1,0 +1,4 @@
+#TODO remove when my PR is on PyPi
+git+https://github.com/hdumcke/multipass-sdk@PR2#egg=multipass-sdk
+#multipass-sdk
+pyyaml

@@ -1,0 +1,5 @@
+vm1:
+  cpu: 1
+  mem: 1G
+  disk: 3G
+  image: jammy
