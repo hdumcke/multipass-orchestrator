@@ -57,10 +57,9 @@ Please refer to the Multipass documentation if you want to know more about these
 To customize the instance and run scripts use these optional parameters:
 
 - **cloud_init** The path to a cloud-init file, usefull to inject ssh keys
-- **git_repo** This git repo will be cloned in the instance
-- **branch** This allows you to specify a branch for the above repo
-- **build_script** This path to the build script in the above repo
-- **run_script** This path to a script in the above repo that will be run after the build script
+- **git_repos** A list of git repos that will be cloned in the instance. You can add a -b parameter to speficy a branch
+- **build_scripts** A list of paths to the build scripts in the above repos
+- **run_scripts** A list of paths to scripts in the above repo that will be run after the build scripts
 
 ## Examples
 

@@ -4,24 +4,33 @@ vm1:
   disk: 3G
   image: jammy
   cloud_init: ./cloud-config.yaml
-  git_repo: https://github.com/hdumcke/multipass-orchestrator.git
-  build_script: ./multipass-orchestrator/tests/build.sh
-  run_script: ./multipass-orchestrator/tests/run.sh
+  git_repos:
+    - https://github.com/hdumcke/multipass-orchestrator.git
+  build_scripts:
+    - ./multipass-orchestrator/tests/build.sh
+  run_scripts:
+    - ./multipass-orchestrator/tests/run.sh
 vm2:
   cpu: 1
   mem: 1G
   disk: 3G
   image: jammy
   cloud_init: ./cloud-config.yaml
-  git_repo: https://github.com/hdumcke/multipass-orchestrator.git
-  build_script: ./multipass-orchestrator/tests/build.sh
-  run_script: ./multipass-orchestrator/tests/run.sh
+  git_repos:
+    - https://github.com/hdumcke/multipass-orchestrator.git
+  build_scripts:
+    - ./multipass-orchestrator/tests/build.sh
+  run_scripts:
+    - ./multipass-orchestrator/tests/run.sh
 vm3:
   cpu: 1
   mem: 1G
   disk: 3G
   image: jammy
   cloud_init: ./cloud-config.yaml
-  git_repo: https://github.com/hdumcke/multipass-orchestrator.git
-  build_script: ./multipass-orchestrator/tests/build.sh
-  run_script: ./multipass-orchestrator/tests/run.sh
+  git_repos:
+    - https://github.com/hdumcke/multipass-orchestrator.git
+  build_scripts:
+    - ./multipass-orchestrator/tests/build.sh
+  run_scripts:
+    - ./multipass-orchestrator/tests/run.sh

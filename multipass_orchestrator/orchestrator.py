@@ -47,25 +47,22 @@ class MultipassOrchestrator:
         build = {}
         for vm_name in self.config:
             build[vm_name] = {}
-            if 'git_repo' in self.config[vm_name]:
-                build[vm_name]['git_repo'] = self.config[vm_name]['git_repo']
-            if 'git_branch' in self.config[vm_name]:
-                build[vm_name]['git_branch'] = self.config[vm_name]['git_branch']
-            if 'build_script' in self.config[vm_name]:
-                build[vm_name]['build_script'] = self.config[vm_name]['build_script']
+            if 'git_repos' in self.config[vm_name]:
+                build[vm_name]['git_repos'] = self.config[vm_name]['git_repos']
+            if 'build_scripts' in self.config[vm_name]:
+                build[vm_name]['build_scripts'] = self.config[vm_name]['build_scripts']
         for vm_name in build:
             if len(build[vm_name]) == 0:
                 continue
             build_script = "/tmp/%s_build.sh" % vm_name
             with open(build_script, 'w') as fh:
                 fh.write("#!/bin/bash\n\n")
-                if 'git_repo' in build[vm_name]:
-                    branch = ''
-                    if 'git_branch' in build[vm_name]:
-                        branch = "-b %s" % build[vm_name]['git_branch']
-                    fh.write("git clone %s %s\n\n" % (branch, build[vm_name]['git_repo']))
-                if 'build_script' in build[vm_name]:
-                    fh.write("%s 2> .build_err.log > .build_out.log\n" % build[vm_name]['build_script'])
+                if 'git_repos' in build[vm_name]:
+                    for i in range(len(build[vm_name]['git_repos'])):
+                        fh.write("git clone %s\n\n" % build[vm_name]['git_repos'][i])
+                if 'build_scripts' in build[vm_name]:
+                    for i in range(len(build[vm_name]['build_scripts'])):
+                        fh.write("%s 2>> .build_err.log >> .build_out.log\n" % build[vm_name]['build_scripts'][i])
                 proc = multiprocessing.Process(target=execute, args=(vm_name, build_script,))
                 self.procs.append(proc)
                 proc.start()
@@ -77,16 +74,17 @@ class MultipassOrchestrator:
         run = {}
         for vm_name in self.config:
             run[vm_name] = {}
-            if 'run_script' in self.config[vm_name]:
-                run[vm_name]['run_script'] = self.config[vm_name]['run_script']
+            if 'run_scripts' in self.config[vm_name]:
+                run[vm_name]['run_scripts'] = self.config[vm_name]['run_scripts']
         for vm_name in run:
             if len(run[vm_name]) == 0:
                 continue
             run_script = "/tmp/%s_run.sh" % vm_name
             with open(run_script, 'w') as fh:
                 fh.write("#!/bin/bash\n\n")
-                if 'run_script' in run[vm_name]:
-                    fh.write("%s 2> .run_err.log > .run_out.log\n" % run[vm_name]['run_script'])
+                if 'run_scripts' in run[vm_name]:
+                    for i in range(len(run[vm_name]['run_scripts'])):
+                        fh.write("%s 2>> .run_err.log >> .run_out.log\n" % run[vm_name]['run_scripts'][i])
                 proc = multiprocessing.Process(target=execute, args=(vm_name, run_script,))
                 self.procs.append(proc)
                 proc.start()
