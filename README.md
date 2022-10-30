@@ -8,7 +8,7 @@ You need Multipass to use this orchestrator.
 
 Simply run:
 ```
-pip install git+https://github.com/hdumcke/multipass-sdk@PR2#egg=multipass-sdk # while waiting for PR to be accepted
+pip install git+https://github.com/okyanusoz/multipass-sdk@main#egg=multipass-sdk # while waiting for new release
 pip install git+https://github.com/hdumcke/multipass-orchestrator@main#egg=multipass-orchestrator
 ```
 
@@ -24,6 +24,7 @@ git clone --depth=1 https://github.com/hdumcke/multipass-orchestrator
 
 Then run:
 ```
+pip install -r requirements.txt
 python setup.py install
 ```
 
