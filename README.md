@@ -13,7 +13,6 @@ pip install git+https://github.com/okyanusoz/multipass-sdk.git@main#egg=multipas
 
 Next simply run:
 ```
-pip install git+https://github.com/okyanusoz/multipass-sdk.git@main#egg=multipass-sdk
 pip install git+https://github.com/hdumcke/multipass-orchestrator@main#egg=multipass-orchestrator
 ```
 
