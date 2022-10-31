@@ -1,2 +1,3 @@
 multipass_orchestrator.egg-info
 .eggs
+multipass_orchestrator/__pycache__
