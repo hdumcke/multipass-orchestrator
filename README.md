@@ -28,6 +28,7 @@ git clone --depth=1 https://github.com/hdumcke/multipass-orchestrator
 
 Then run:
 ```
+pip install -r requirements.txt
 python setup.py install
 ```
 
