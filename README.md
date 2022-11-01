@@ -86,3 +86,14 @@ exit # leave vm
 mpo-delete test-environment.yaml
 multipass list
 ```
+
+## Using Your Own ssh Key
+
+The above example test-environment.yaml injects a pre-build ssh key when run from the tests directory. To use your own ssh key create a file cloud-config.yaml with your public ssh key in a different directory and run mpo-deploy command from that directory.
+
+```
+ls cloud-config.yaml # this should be the file with your key
+mpo-deploy <path to test-environment.yaml>
+multipass list
+ssh ubuntu@192.168.64.32 # use IP addess shown with multipass list
+```
