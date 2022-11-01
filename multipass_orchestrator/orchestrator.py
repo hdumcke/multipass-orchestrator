@@ -49,7 +49,7 @@ class MultipassOrchestrator:
     def build_environment(self):
         if platform == "linux" or platform == "linux2":
             # Multipass installed with Snap can not access /tmp
-            tempfile.tempdir = '/var/tmp'
+            tempfile.tempdir = os.path.expanduser("~")
         tmp_dir = tempfile.gettempdir()
         build = {}
         for vm_name in self.config:
@@ -80,7 +80,7 @@ class MultipassOrchestrator:
     def run_environment(self):
         if platform == "linux" or platform == "linux2":
             # Multipass installed with Snap can not access /tmp
-            tempfile.tempdir = '/var/tmp'
+            tempfile.tempdir = os.path.expanduser("~")
         tmp_dir = tempfile.gettempdir()
         run = {}
         for vm_name in self.config:
