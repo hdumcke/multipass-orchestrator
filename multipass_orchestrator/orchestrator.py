@@ -1,5 +1,8 @@
 import yaml
+import tempfile
+import os
 import multiprocessing
+from sys import platform
 from multipass import MultipassClient
 
 
@@ -44,6 +47,10 @@ class MultipassOrchestrator:
                                    image=self.config[vm_name]['image'])
 
     def build_environment(self):
+        if platform == "linux" or platform == "linux2":
+            # Multipass installed with Snap can not access /tmp
+            tempfile.tempdir = '/var/tmp'
+        tmp_dir = tempfile.gettempdir()
         build = {}
         for vm_name in self.config:
             build[vm_name] = {}
@@ -54,7 +61,7 @@ class MultipassOrchestrator:
         for vm_name in build:
             if len(build[vm_name]) == 0:
                 continue
-            build_script = "/tmp/%s_build.sh" % vm_name
+            build_script = os.path.join(tmp_dir, "%s_build.sh" % vm_name)
             with open(build_script, 'w') as fh:
                 fh.write("#!/bin/bash\n\n")
                 if 'git_repos' in build[vm_name]:
@@ -71,6 +78,10 @@ class MultipassOrchestrator:
             proc.join()
 
     def run_environment(self):
+        if platform == "linux" or platform == "linux2":
+            # Multipass installed with Snap can not access /tmp
+            tempfile.tempdir = '/var/tmp'
+        tmp_dir = tempfile.gettempdir()
         run = {}
         for vm_name in self.config:
             run[vm_name] = {}
@@ -79,7 +90,7 @@ class MultipassOrchestrator:
         for vm_name in run:
             if len(run[vm_name]) == 0:
                 continue
-            run_script = "/tmp/%s_run.sh" % vm_name
+            run_script = os.path.join(tmp_dir, "%s_run.sh" % vm_name)
             with open(run_script, 'w') as fh:
                 fh.write("#!/bin/bash\n\n")
                 if 'run_scripts' in run[vm_name]:
