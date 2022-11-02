@@ -49,7 +49,7 @@ class MultipassOrchestrator:
     def build_environment(self):
         if platform == "linux" or platform == "linux2":
             # Multipass installed with Snap can not access /tmp
-            tmp_dir = os.path.join(os.path.expanduser("~"), '.cache', 'mpo')
+            tmp_dir = os.path.join(os.path.expanduser("~"), 'mpo-tmp')
             if not os.path.exists(tmp_dir):
                 os.makedirs(tmp_dir)
             tempfile.tempdir = tmp_dir
@@ -83,7 +83,7 @@ class MultipassOrchestrator:
     def run_environment(self):
         if platform == "linux" or platform == "linux2":
             # Multipass installed with Snap can not access /tmp
-            tmp_dir = os.path.join(os.path.expanduser("~"), '.cache', 'mpo')
+            tmp_dir = os.path.join(os.path.expanduser("~"), 'mpo-tmp')
             if not os.path.exists(tmp_dir):
                 os.makedirs(tmp_dir)
             tempfile.tempdir = tmp_dir
