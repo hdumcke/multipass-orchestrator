@@ -97,3 +97,7 @@ mpo-deploy <path to test-environment.yaml>
 multipass list
 ssh ubuntu@192.168.64.32 # use IP addess shown with multipass list
 ```
+
+## Caveats
+
+Under Ubuntu you have to install Multipass using Snap. This restricts the locations from where files can be copied into the running virtual machines. Multipass Orchestrator may create a directory ~/mpo-tmp containig files that will be transferred. You may delete this directory after using mpo-deploy.
