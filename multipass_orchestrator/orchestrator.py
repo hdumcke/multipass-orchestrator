@@ -10,8 +10,12 @@ def execute(vm_name, script):
     client = MultipassClient()
     client.transfer(script, "%s:/home/ubuntu" % vm_name)
     vm = client.get_vm(vm_name)
-    vm.exec("chmod +x %s" % script.split('/')[-1])
-    vm.exec("./%s" % script.split('/')[-1])
+    if platform == 'win32':
+        script_filename = script.split('\\')[-1]
+    else:
+        script_filename = script.split('/')[-1]
+    vm.exec("chmod +x %s" % script_filename)
+    vm.exec("./%s" % script_filename)
 
 
 class MultipassOrchestrator:
@@ -65,7 +69,7 @@ class MultipassOrchestrator:
             if len(build[vm_name]) == 0:
                 continue
             build_script = os.path.join(tmp_dir, "%s_build.sh" % vm_name)
-            with open(build_script, 'w') as fh:
+            with open(build_script, 'w', newline="\n") as fh:
                 fh.write("#!/bin/bash\n\n")
                 if 'git_repos' in build[vm_name]:
                     for i in range(len(build[vm_name]['git_repos'])):
@@ -97,7 +101,7 @@ class MultipassOrchestrator:
             if len(run[vm_name]) == 0:
                 continue
             run_script = os.path.join(tmp_dir, "%s_run.sh" % vm_name)
-            with open(run_script, 'w') as fh:
+            with open(run_script, 'w', newline="\n") as fh:
                 fh.write("#!/bin/bash\n\n")
                 if 'run_scripts' in run[vm_name]:
                     for i in range(len(run[vm_name]['run_scripts'])):
