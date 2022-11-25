@@ -67,12 +67,14 @@ class MultipassOrchestrator:
             build_script = os.path.join(tmp_dir, "%s_build.sh" % vm_name)
             with open(build_script, 'w') as fh:
                 fh.write("#!/bin/bash\n\n")
+                fh.write("echo build started $(date) >> .build_out.log\n\n")
                 if 'git_repos' in build[vm_name]:
                     for i in range(len(build[vm_name]['git_repos'])):
                         fh.write("git clone %s\n\n" % build[vm_name]['git_repos'][i])
                 if 'build_scripts' in build[vm_name]:
                     for i in range(len(build[vm_name]['build_scripts'])):
                         fh.write("%s 2>> .build_err.log >> .build_out.log\n" % build[vm_name]['build_scripts'][i])
+                fh.write("\necho build ended $(date) >> .build_out.log\n")
                 proc = multiprocessing.Process(target=execute, args=(vm_name, build_script,))
                 self.procs.append(proc)
                 proc.start()
@@ -99,9 +101,11 @@ class MultipassOrchestrator:
             run_script = os.path.join(tmp_dir, "%s_run.sh" % vm_name)
             with open(run_script, 'w') as fh:
                 fh.write("#!/bin/bash\n\n")
+                fh.write("echo run started $(date) >> .run_out.log\n\n")
                 if 'run_scripts' in run[vm_name]:
                     for i in range(len(run[vm_name]['run_scripts'])):
                         fh.write("%s 2>> .run_err.log >> .run_out.log\n" % run[vm_name]['run_scripts'][i])
+                fh.write("\necho run ended $(date) >> .run_out.log\n")
                 proc = multiprocessing.Process(target=execute, args=(vm_name, run_script,))
                 self.procs.append(proc)
                 proc.start()
