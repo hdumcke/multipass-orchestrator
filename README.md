@@ -6,7 +6,13 @@ This is an UNOFFICIAL orchestrator using the [UNOFFICIAL Multipass Python SDK](h
 
 You need Multipass to use this orchestrator.
 
-To install simply run:
+The version of multipass-sdk on pypi is out of date, first you have to install multipass-sdk from github:
+```
+pip install git+https://github.com/okyanusoz/multipass-sdk.git@main#egg=multipass-sdk
+```
+If you omit this step the next step will install the outdated version.
+
+Next simply run:
 ```
 pip install git+https://github.com/hdumcke/multipass-orchestrator@main#egg=multipass-orchestrator
 ```
