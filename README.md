@@ -10,6 +10,7 @@ The version of multipass-sdk on pypi is out of date, first you have to install m
 ```
 pip install git+https://github.com/okyanusoz/multipass-sdk.git@main#egg=multipass-sdk
 ```
+If you omit this step the next step will install the outdated version.
 
 Next simply run:
 ```
