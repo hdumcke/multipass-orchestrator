@@ -7,7 +7,7 @@ def main():
         print("Usage %s <config.yaml>" % sys.argv[0])
         sys.exit(1)
     env = mpo(sys.argv[1])
-    env.delete_environment()
+    env.destroy_environment()
 
 
 if __name__ == '__main__':

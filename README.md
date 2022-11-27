@@ -46,7 +46,7 @@ mpo-deploy <config.yaml>
 And when done:
 
 ```
-mpo-delete <config.yaml>
+mpo-destroy <config.yaml>
 ```
 
 ### How it works
@@ -77,14 +77,14 @@ mpo-deploy simple.yaml
 multipass list
 multipass shell vm1
 exit # leave vm
-mpo-delete simple.yaml
+mpo-destroy simple.yaml
 multipass list
 mpo-deploy test-environment.yaml
 multipass list
 ssh -o "IdentitiesOnly=yes" -i id_rsa -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no ubuntu@192.168.64.32 # use IP addess shown with multipass list
 ls -la # see injected build and run script, see build and run log files
 exit # leave vm
-mpo-delete test-environment.yaml
+mpo-destroy test-environment.yaml
 multipass list
 ```
 

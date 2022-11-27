@@ -25,7 +25,7 @@ class MultipassOrchestrator:
         with open(config_file, 'r') as fh:
             self.config = yaml.load(fh, yaml.CSafeLoader)
 
-    def delete_environment(self):
+    def destroy_environment(self):
         vm_list = self.client.list()
         del_list = self.config.keys()
         for i in range(len(vm_list['list'])):
