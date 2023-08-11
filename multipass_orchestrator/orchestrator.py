@@ -8,7 +8,7 @@ from multipass import MultipassClient
 
 def execute(vm_name, script):
     client = MultipassClient()
-    client.transfer(script, "%s:/home/ubuntu" % vm_name)
+    client.transfer(script, "%s:/home/ubuntu/%s" % (vm_name, script.split('/')[-1]))
     vm = client.get_vm(vm_name)
     if platform == 'win32':
         script_filename = script.split('\\')[-1]
